@@ -40,6 +40,13 @@ public class  MainActivity extends AppCompatActivity implements NavigationInterf
         //If the bundle is null, then display the default fragment using navigationView.setSelectedItem();
         //Reminder, to get a menu item, use navigationView.getMenu().getItem(idex)
 
+        if(savedInstanceState!=null) {
+            currentFragment = getSupportFragmentManager().getFragment(savedInstanceState, FRAGMENT_STORED_KEY);
+            replaceFragment(currentFragment);
+            // Ajout au cache
+            fragmentArray.put(savedInstanceState.getInt(FRAGMENT_NUMBER_KEY), currentFragment);
+        }
+        else navigationView.setSelectedItem(navigationView.getMenu().getItem(0));
         //Let's imagine we retrieve the stored counter state, before creating the favorite Fragment
         //and then be able to update and manage its state.
         updateFavoriteCounter(3);
@@ -132,4 +139,11 @@ public class  MainActivity extends AppCompatActivity implements NavigationInterf
     //Reminder, to get the selected item in the menu, we can use myNavView.getCheckedItem()
     //TODO then save the current state of the fragment, you may read https://stackoverflow.com/questions/15313598/once-for-all-how-to-correctly-save-instance-state-of-fragments-in-back-stack
 
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(FRAGMENT_NUMBER_KEY, navigationView.getCheckedItem().getOrder());
+        getSupportFragmentManager().putFragment(outState, FRAGMENT_STORED_KEY, currentFragment);
+    }
 }
