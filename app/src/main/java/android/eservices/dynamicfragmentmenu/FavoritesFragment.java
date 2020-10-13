@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -101,4 +102,11 @@ public class FavoritesFragment extends Fragment {
     //TODO save the state of the counter i.e. the current counter number
     //TODO in order to restore it later
 
+    // https://developer.android.com/guide/components/activities/activity-lifecycle#save-simple,-lightweight-ui-state-using-onsaveinstancestate
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt(COUNTER_STATE_KEY, currentCounter);
+        super.onSaveInstanceState(savedInstanceState);
+    }
 }
