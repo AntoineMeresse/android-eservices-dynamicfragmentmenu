@@ -12,8 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationInterface {
 
@@ -31,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupNavigationElements();
-
 
         //TODO Restore instance state
         //If available :
@@ -73,18 +76,40 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
                 //store it the way you prefer, so when you select this menu item later, you first check if the fragment already exists
                 //and then you use it. If the fragment doesn't exist (it is not cached then) you get an instance of it and store it in the cache.
 
+                Fragment f = fragmentArray.get(menuItem.getOrder());
+
+                if(f == null){
+                    switch (menuItem.getOrder()){
+                        case 0:
+                            System.out.println("First");
+                            f = SelectedFragment.newInstance();
+                            break;
+                        case 1:
+                            System.out.println("2nd");
+                            f = FavoritesFragment.newInstance();
+                            break;
+                    }
+                    fragmentArray.put(menuItem.getOrder(), f);
+                }
+
+                currentFragment = f;
+                replaceFragment(currentFragment);
 
                 //TODO when we select logoff, I want the Activity to be closed (and so the Application, as it has only one activity)
-
+                if (menuItem.getOrder() == 2) logoff();
                 //check in the doc what this boolean means and use it the right way ...
                 return false;
             }
         });
     }
 
-
     private void replaceFragment(Fragment newFragment) {
         //TODO replace fragment inside R.id.fragment_container using a FragmentTransaction
+        getSupportFragmentManager().beginTransaction()
+                //.setCustomAnimations(R.anim.slide_out)
+                .replace(R.id.fragment_container, newFragment)
+                .addToBackStack("null")
+                .commit();
     }
 
     private void logoff() {

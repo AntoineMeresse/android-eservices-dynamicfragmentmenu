@@ -57,9 +57,11 @@ public class FavoritesFragment extends Fragment {
         setupButtons();
 
         //TODO if available, restore the state of the current counter
-        //TODO if there is no value to restore, set the counter to default value 4
-        //TODO finally call refreshCounter to update the display
 
+        //TODO if there is no value to restore, set the counter to default value 4
+
+        //TODO finally call refreshCounter to update the display
+        //refreshCounter();
     }
 
     private void setupButtons() {
@@ -90,7 +92,7 @@ public class FavoritesFragment extends Fragment {
     }
 
     private void refreshCounter() {
-        counterTextView.setText(Integer.toString(currentCounter));
+        counterTextView.setText(currentCounter.toString());
         removeButton.setEnabled(currentCounter != 0);
         navigationInterface.updateFavoriteCounter(currentCounter);
     }
