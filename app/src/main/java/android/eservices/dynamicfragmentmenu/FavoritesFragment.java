@@ -57,11 +57,11 @@ public class FavoritesFragment extends Fragment {
         setupButtons();
 
         //TODO if available, restore the state of the current counter
-
+        if (savedInstanceState != null) currentCounter = savedInstanceState.getInt(COUNTER_STATE_KEY);
         //TODO if there is no value to restore, set the counter to default value 4
-
+        else currentCounter = 4;
         //TODO finally call refreshCounter to update the display
-        //refreshCounter();
+        refreshCounter();
     }
 
     private void setupButtons() {

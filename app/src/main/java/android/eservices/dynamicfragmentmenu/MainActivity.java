@@ -12,14 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class MainActivity extends AppCompatActivity implements NavigationInterface {
+public class  MainActivity extends AppCompatActivity implements NavigationInterface {
 
     private final static String FRAGMENT_NUMBER_KEY = "Fragment_Number";
     private final static String FRAGMENT_STORED_KEY = "Fragment_Stored";
@@ -98,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
                 //TODO when we select logoff, I want the Activity to be closed (and so the Application, as it has only one activity)
                 if (menuItem.getOrder() == 2) logoff();
                 //check in the doc what this boolean means and use it the right way ...
-                return false;
+                return true;
             }
         });
     }
