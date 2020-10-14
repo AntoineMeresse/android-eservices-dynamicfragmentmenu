@@ -41,6 +41,7 @@ public class  MainActivity extends AppCompatActivity implements NavigationInterf
         //Reminder, to get a menu item, use navigationView.getMenu().getItem(idex)
 
         if(savedInstanceState!=null) {
+            System.out.println("==========Available instance state==============");
             currentFragment = getSupportFragmentManager().getFragment(savedInstanceState, FRAGMENT_STORED_KEY);
             replaceFragment(currentFragment);
             // Ajout au cache
@@ -49,7 +50,7 @@ public class  MainActivity extends AppCompatActivity implements NavigationInterf
         else navigationView.setSelectedItem(navigationView.getMenu().getItem(0));
         //Let's imagine we retrieve the stored counter state, before creating the favorite Fragment
         //and then be able to update and manage its state.
-        updateFavoriteCounter(3);
+        updateFavoriteCounter(4);
     }
 
     @Override

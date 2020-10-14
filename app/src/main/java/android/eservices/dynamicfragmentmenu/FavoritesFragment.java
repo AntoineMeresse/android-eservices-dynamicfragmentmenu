@@ -26,6 +26,7 @@ public class FavoritesFragment extends Fragment {
     private Button addButton;
     private Button removeButton;
     private TextView counterTextView;
+    private boolean init;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -56,11 +57,14 @@ public class FavoritesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         System.out.println("On activity created " + this);
         setupButtons();
-
-        //TODO if available, restore the state of the current counter
-        if (savedInstanceState != null) currentCounter = savedInstanceState.getInt(COUNTER_STATE_KEY);
-        //TODO if there is no value to restore, set the counter to default value 4
-        else currentCounter = 4;
+        if(!init) {
+            //TODO if available, restore the state of the current counter
+            if (savedInstanceState != null)
+                currentCounter = savedInstanceState.getInt(COUNTER_STATE_KEY);
+                //TODO if there is no value to restore, set the counter to default value 4
+            else currentCounter = 4;
+            init = true;
+        }
         //TODO finally call refreshCounter to update the display
         refreshCounter();
     }
